@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Configure MongoDB connection
 client = MongoClient(
-    "mongodb+srv://joseph:FBcnrQuC46ehXdpJ@cluster.bxn70yq.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://josephf:4tqqTe1wjnBYbUg4@cluster.muizicl.mongodb.net/?retryWrites=true&w=majority"
 )
 db = client.webscrap
 bbc = db.bbcscrap
