@@ -12,7 +12,7 @@ db = client.webscrap
 bbc = db.bbcscrap
 
 
-# Define a route that seearches for articles based on a provided keyword
+# Define a route that searches for articles based on a provided keyword
 @app.route('/search', methods=['Get'])
 def search_articles():
     # Get the keyword from request parameters
