@@ -63,4 +63,4 @@ class CrawlingSpider(CrawlSpider):
         )
         db = client.webscrap
         bbc = db.bbcscrap
-        bbc.inser_one(data)
+        bbc.insert_one(data)
