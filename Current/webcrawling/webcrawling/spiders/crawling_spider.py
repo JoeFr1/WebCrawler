@@ -27,7 +27,7 @@ class CrawlingSpider(CrawlSpider):
 
         # Initialize content
         text_content = ""
-
+        print("Crawling Data")
         # Check if post is a video (Contains /av in URL)
         if "/av" in url:
             # Loop through the divs with specified class
@@ -58,9 +58,11 @@ class CrawlingSpider(CrawlSpider):
                 "URL": url,
                 "Content": text_content
             }
+        print("Connecting to MongoDB...")
         client = MongoClient(
             "mongodb+srv://josephf:4tqqTe1wjnBYbUg4@cluster.muizicl.mongodb.net/?retryWrites=true&w=majority"
         )
         db = client.webscrap
         bbc = db.bbcscrap
         bbc.insert_one(data)
+        print("Data Inserted")
