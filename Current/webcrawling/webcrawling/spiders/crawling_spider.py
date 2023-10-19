@@ -17,6 +17,8 @@ class CrawlingSpider(CrawlSpider):
         # Extract title of the article
         title = response.css(".e1mcntqj3 h1::text").get()
 
+        # MongoDB Uri
+        uri = "mongodb+srv://cluster0.hq133qf.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority"
         # Extract the author's name, or set it not "Author Not Available" if not found
         author = response.css("div.ssrcss-68pt20-Text-TextContributorName.e8mq1e96::text").get()
         if author is None:
@@ -47,7 +49,6 @@ class CrawlingSpider(CrawlSpider):
             for div in response.css('div.ssrcss-7uxr49-RichTextContainer.e5tfeyi1'):
                 # Extract text from all p and a elements within div
                 div_text = ''.join(div.css('p::text').getall())
-                div_text = ''.join(div.css('a::text').getall())
                 text_content += div_text
 
         if title is not None:
@@ -59,9 +60,9 @@ class CrawlingSpider(CrawlSpider):
                 "Content": text_content
             }
         print("Connecting to MongoDB...")
-        client = MongoClient(
-            "mongodb+srv://josephf:4tqqTe1wjnBYbUg4@cluster.muizicl.mongodb.net/?retryWrites=true&w=majority"
-        )
+        client = MongoClient(uri,
+                     tls=True,
+                     tlsCertificateKeyFile='X509-cert-7954788920278394582.pem')
         db = client.webscrap
         bbc = db.bbcscrap
         bbc.insert_one(data)

@@ -5,9 +5,11 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # Configure MongoDB connection
-client = MongoClient(
-    "mongodb+srv://josephf:4tqqTe1wjnBYbUg4@cluster.muizicl.mongodb.net/?retryWrites=true&w=majority"
-)
+uri = "mongodb+srv://cluster0.hq133qf.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority"
+print("Connecting to MongoDB...")
+client = MongoClient(uri,
+                     tls=True,
+                     tlsCertificateKeyFile='X509-cert-7954788920278394582.pem')
 db = client.webscrap
 bbc = db.bbcscrap
 
